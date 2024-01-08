@@ -19,18 +19,18 @@ Batch renames all poster image files to match Plex's Local Media Asset formats.\
 
 #### Options:
 
-[-h|--help]\
-[-t|-tv]	[TV Directory]		[Second TV Directory...]
+#### [-h|--help]
+#### [-t|-tv]	[TV Directory]		[Second TV Directory...]
 - Specify the root TV directory(s) to rename
 - Leave empty to rename files in current directory
-[-f|-film]	[Film Directory]	[Second Film Directory...]
+#### [-f|-film]	[Film Directory]	[Second Film Directory...]
 - Specify the root Film directory(s) to rename
 - Leave empty to rename files in current directory
-[-d|-default]
+#### [-d|-default]
 - Rename both TV and Film default directory(s)
-[-dt|-defaulttv]
+#### [-dt|-defaulttv]
 - Rename TV default directory(s)
-[-df|-defaultfilm]
+#### [-df|-defaultfilm]
 - Rename Film default directory(s)
 
 
