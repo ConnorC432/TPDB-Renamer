@@ -7,7 +7,7 @@ rename_files() {
       base_name=$(basename "$file")
       
       # Exclude renamed files
-      if [[ $base_name =~ ^(season-specials-poster\.(png|jpg|jpeg)|show\.(png|jpg|jpeg)|Season.*|.*S.*E.*)$ ]]; then
+      if [[ $base_name =~ ^((season-specials-poster|show|Season.*|.*S.*E.*)\.(png|jpg|jpeg))$ ]]; then
           continue
       fi
 
