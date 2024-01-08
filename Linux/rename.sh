@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #default directories
-TV_defaultdir=("/home/connor/testdir")
-Film_defaultdir=("/home/connor/testdir")
+TV_defaultdir=("/home/testdir")
+Film_defaultdir=("/home/testdir")
 
 #Define scripts directory
 script_dir="$(cd "$(dirname "$0")" && pwd)"
@@ -27,7 +27,7 @@ Display_help()
 	echo "		Specify the root Film directory(s) to rename"
 	echo "		Leave empty to rename files in current directory"
 	echo
-	echo "[-da|-defaultall]"
+	echo "[-d|-default]"
 	echo "		Rename both TV and Film default directory(s)"
 	echo
 	echo "[-dt|-defaulttv]"
@@ -124,7 +124,7 @@ while [[ "$#" -gt 0 ]]; do
 				shift
 			done
 			;;
-		-da|-defaultall)
+		-d|-default)
 			tv_used=true
 			film_used=true
 			tv_dir=(${TV_defaultdir[@]})

@@ -27,7 +27,7 @@ else
   base_dir="$1"
 fi
 
-# Loop through each directory in the base directory and call the function
+# Loop through each directory within the base directory and call the function
 for dir in "$base_dir"/*/; do
   rename_to_poster "$dir"
 done
