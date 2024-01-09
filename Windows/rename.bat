@@ -65,7 +65,7 @@ REM Directory array rename function
 set "dir_type=%1"
 shift
 set "input_array=%*"
-for %%I in (!input_array!) do (
+for %%I in (%input_array%) do (
     if exist "%%I" (
         if exist "%%I\" (
             echo Renaming %%I
