@@ -107,7 +107,7 @@ set "tv_used=true"
 shift
 set "tv_dir="
 :parse_tv_loop
-if /I "%~1"=="-" goto parse_loop
+if "%~1"=="" goto parse_loop
 if /I "%~1"=="-f" goto parse_film
 if /I "%~1"=="-film" goto parse_film
 set "tv_dir=!tv_dir! %1"
@@ -119,7 +119,7 @@ set "film_used=true"
 shift
 set "film_dir="
 :parse_film_loop
-if /I "%~1"=="-" goto parse_loop
+if "%~1"=="" goto parse_loop
 if /I "%~1"=="-t" goto parse_tv
 if /I "%~1"=="-tv" goto parse_tv
 set "film_dir=!film_dir! %1"
@@ -131,19 +131,16 @@ set "tv_used=true"
 set "film_used=true"
 set "tv_dir=%TV_defaultdir%"
 set "film_dir=%Film_defaultdir%"
-shift
 goto parse_loop
 
 :parse_defaulttv
 set "tv_used=true"
 set "tv_dir=%TV_defaultdir%"
-shift
 goto parse_loop
 
 :parse_defaultfilm
 set "film_used=true"
 set "film_dir=%Film_defaultdir%"
-shift
 goto parse_loop
 
 REM Rename TV directories
