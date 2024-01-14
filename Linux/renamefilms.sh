@@ -6,7 +6,7 @@ rename_to_poster() {
     if [[ -f $file ]]; then
       base_name=$(basename "$file")
 
-      # Exclude renamed files
+      # Exclude previously renamed files
       if [[ $base_name =~ ^poster\.(png|jpg|jpeg)$ ]]; then
           continue
       fi
@@ -20,14 +20,14 @@ rename_to_poster() {
   done
 }
 
-# Check if a base directory is provided as a command-line argument
+# Check if a directory is provided as a command-line argument
 if [ -z "$1" ]; then
   base_dir="."
 else
   base_dir="$1"
 fi
 
-# Loop through each directory within the base directory and call the function
+# Loop through each subdirectory within the base directory and call the function
 for dir in "$base_dir"/*/; do
   rename_to_poster "$dir"
 done

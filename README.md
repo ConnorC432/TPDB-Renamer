@@ -36,4 +36,4 @@ Batch renames all poster image files to match Plex's Local Media Asset formats.\
 
 ## Appendix
 
-Currently only Linux scripts, might do some windows ones.
+Currently only Linux scripts, windows scripts don't work.
