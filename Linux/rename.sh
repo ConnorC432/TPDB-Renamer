@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #default directories
-TV_defaultdir=("/home/testdir")
-Film_defaultdir=("/home/testdir")
+TV_defaultdir=("/home/testdir" "/home/testdir2")
+Film_defaultdir=("/home/testdir" "/home/testdir2")
 
 #Define scripts directory
 script_dir="$(cd "$(dirname "$0")" && pwd)"
