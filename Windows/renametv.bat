@@ -1,3 +1,4 @@
+REM doesnt work
 @echo off
 setlocal enabledelayedexpansion
 
