@@ -14,19 +14,18 @@ for /r "%target_dir%" %%F in (*.jpg *.jpeg *.png) do (
     set "extension=%%~xF"
 
     REM Check for previously renamed files
-    echo !filename! | findstr /i /r /c:"\(season-specials-poster^|show^|Season.*^|.*S.*E.*\)\.\(png^|jpg^|jpeg\)" >nul
+    echo !filename! | findstr /i /r /c:"\(Season .*^|season-specials-poster^|show\)" >nul
     if !errorlevel! equ 0 (
-        echo Skipping: !filename!!extension!
+        echo Not renaming: !filename!!extension!
     ) else (
         REM Check if the file is a Season poster
-        echo !filename! | findstr /i /r /c:"(.*) - Season ([0-9]+)\.\(png^|jpg^|jpeg\)" >nul
+        echo !filename! | findstr /i /r /c:".* Season .*" >nul
         if !errorlevel! equ 0 (
-            set "showname=!matches[1]!"
-            set "season=!matches[2]!"
+            set "season=!filename:.* Season =!"
             ren "%%F" "Season !season!!extension!"
         ) else (
             REM Check if the file is a Specials poster
-            echo !filename! | findstr /i /r /c:"(.*) - Specials\.\(png^|jpg^|jpeg\)" >nul
+            echo !filename! | findstr /i /r /c:".* Specials .*" >nul
             if !errorlevel! equ 0 (
                 ren "%%F" "season-specials-poster!extension!"
             ) else (
