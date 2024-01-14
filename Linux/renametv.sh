@@ -11,13 +11,13 @@ rename_files() {
           continue
       fi
 
-      # Check for * - Season *
+      # Check if the file is a Season poster
       if [[ $base_name =~ (.*)\ -\ Season\ ([0-9]+)\.(png|jpg|jpeg) ]]; then
         new_name="Season ${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
-      # Check for * - Specials
+      # Check if the file is a Specials poster
       elif [[ $base_name =~ (.*)\ -\ Specials\.(png|jpg|jpeg) ]]; then
         new_name="season-specials-poster.${BASH_REMATCH[2]}"
-      # Default to show for other files
+      # Assuming it is a Show poster
       else
         new_name="show.${base_name##*.}"
       fi

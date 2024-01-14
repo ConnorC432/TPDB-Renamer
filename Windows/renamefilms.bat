@@ -8,7 +8,7 @@ if "%1"=="" (
     set "target_directory=%1"
 )
 
-REM Loop through each directory in the base directory and find image files
+REM Loop through each subdirectory in the base directory and find image files
 for /r "%target_directory%" %%f in (*.jpg *.jpeg *.png) do (
     set "base_name=%%~nxf"
     
@@ -21,5 +21,3 @@ for /r "%target_directory%" %%f in (*.jpg *.jpeg *.png) do (
     REM Rename the file
     ren "%%f" "poster%%~xf"
 )
-
-echo Renaming completed.

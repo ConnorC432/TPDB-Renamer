@@ -1,37 +1,40 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Check if a directory is provided as a command line argument
+REM Check if a directory argument is provided, otherwise use the current directory
 if "%1"=="" (
-    set "target_directory=%CD%"
+    set "target_dir=%cd%"
 ) else (
-    set "target_directory=%1"
+    set "target_dir=%1"
 )
 
-REM Loop through each directory in the base directory and find image files
-for /r "%target_directory%" %%f in (*.jpg *.jpeg *.png) do (
-    set "base_name=%%~nxf"
-    set "new_name="
+REM Loop through each subdirectory in the base directory and find image files
+for /r "%target_dir%" %%F in (*.jpg *.jpeg *.png) do (
+    set "filename=%%~nF"
+    set "extension=%%~xF"
 
-    REM Exclude previously renamed files
-    echo !base_name! | findstr /R /C:"^((season-specials-poster^|show^|Season.*^|.*S.*E.*)\.\(png^|jpg^|jpeg\))$" >nul 2>&1
+    REM Check for previously renamed files
+    echo !filename! | findstr /i /r /c:"\(season-specials-poster^|show^|Season.*^|.*S.*E.*\)\.\(png^|jpg^|jpeg\)" >nul
     if !errorlevel! equ 0 (
-        continue
-    )
-
-    REM Determine how to rename files
-    echo !base_name! | findstr /R /C:"^.* - Season [0-9][0-9]*\.\(png\|jpg\|jpeg\)$" >nul 2>&1
-    if !errorlevel! equ 0 (
-        for /f "tokens=5 delims=-. " %%a in ("!base_name!") do set "new_name=Season %%a.%%b"
+        echo Skipping: !filename!!extension!
     ) else (
-        echo !base_name! | findstr /R /C:"^.* - Specials\.\(png\|jpg\|jpeg\)$" >nul 2>&1
+        REM Check if the file is a Season poster
+        echo !filename! | findstr /i /r /c:"(.*) - Season ([0-9]+)\.\(png^|jpg^|jpeg\)" >nul
         if !errorlevel! equ 0 (
-            set "new_name=season-specials-poster"
+            set "showname=!matches[1]!"
+            set "season=!matches[2]!"
+            ren "%%F" "Season !season!!extension!"
         ) else (
-            set "new_name=show.!base_name:*.=!"
+            REM Check if the file is a Specials poster
+            echo !filename! | findstr /i /r /c:"(.*) - Specials\.\(png^|jpg^|jpeg\)" >nul
+            if !errorlevel! equ 0 (
+                ren "%%F" "season-specials-poster!extension!"
+            ) else (
+                REM Assuming it is a Show poster
+                ren "%%F" "show!extension!"
+            )
         )
     )
-
-    REM Rename the file
-    if not "!new_name!"=="" ren "%%f" "!new_name!%%~xf"
 )
+
+endlocal
