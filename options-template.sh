@@ -4,10 +4,10 @@
 
 #TV
 TV_defaultdir=("/home/testdir")
-TV_chown=750
-TV_chmod=1002:1000
+TV_chown=uid:gid
+TV_chmod=750
 
 #Films
 Film_defaultdir=("/home/testdir")
-Film_chown=750
-Film_chmod=1003:1000
+Film_chown=user:group
+Film_chmod=750
