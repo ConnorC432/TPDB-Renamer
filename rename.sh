@@ -1,12 +1,5 @@
 #!/bin/bash
 
-<<<<<<< HEAD:Linux/rename.sh
-#default directories
-TV_defaultdir=("/home/testdir" "/home/testdir2")
-Film_defaultdir=("/home/testdir" "/home/testdir2")
-=======
-
->>>>>>> 9b281ed (added auto chmod and chown and options):renametool.sh
 
 #Define scripts directory
 script_dir="$(cd "$(dirname "$0")" && pwd)"
