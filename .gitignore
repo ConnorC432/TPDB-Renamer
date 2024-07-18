@@ -1,3 +1,7 @@
 *.code-workspace
+<<<<<<< HEAD
 createrelease.sh
 *.zip
+=======
+options.sh
+>>>>>>> 9b281ed (added auto chmod and chown and options)

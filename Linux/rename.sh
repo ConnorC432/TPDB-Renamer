@@ -1,11 +1,17 @@
 #!/bin/bash
 
+<<<<<<< HEAD:Linux/rename.sh
 #default directories
 TV_defaultdir=("/home/testdir" "/home/testdir2")
 Film_defaultdir=("/home/testdir" "/home/testdir2")
+=======
+
+>>>>>>> 9b281ed (added auto chmod and chown and options):renametool.sh
 
 #Define scripts directory
 script_dir="$(cd "$(dirname "$0")" && pwd)"
+
+source $script_dir/options.sh
 
 #Help
 Display_help()
@@ -149,14 +155,25 @@ while [[ "$#" -gt 0 ]]; do
 	shift
 done
 
+#directory permissions
+dir_perms()
+{
+	chmod -R $2 $1
+	chown -R $3 $1
+}
+
 #Rename TV directories
 if [ "$tv_used" = true ]; then
 	echo "Renaming TV Directories"
 	rename_array "TV" "${tv_dir[@]}"
+	echo "Applying TV Directory Permissions"
+	dir_perms "${tv_dir[@]}" "$TV_chmod" "$TV_chown"
 fi
 
 #Rename Film directories
 if [ "$film_used" = true ]; then
 	echo "Renaming Film Directories"
 	rename_array "Film" "${film_dir[@]}"
+	echo "Applying Film Directory Permissions"
+	dir_perms "${film_dir[@]}" "$Film_chmod" "$Film_chown"
 fi
