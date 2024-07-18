@@ -32,8 +32,3 @@ Batch renames all poster image files to match Plex's Local Media Asset formats.\
 - Rename TV default directory(s)
 #### [-df|-defaultfilm]
 - Rename Film default directory(s)
-
-
-## Appendix
-
-Currently only Linux scripts, windows scripts don't work.
