@@ -103,7 +103,7 @@ def main():
     )
     parser.add_argument('-t', '--tv', nargs='+', help='TV Directories to rename', required=False)
     parser.add_argument('-f', '--film', nargs='+', help='Film Directories to rename', required=False)
-    parser.epilog = 'Example Usage:\n tpdb-rename.py -t /dir/1/ /dir/2/ -f /dir/1/ /dir/2/'
+    parser.epilog = 'example usage:\n tpdb-rename.py -t /tv/dir1/ /tv/dir2/ -f /film/dir1/ /film/dir2/'
 
     args = parser.parse_args()
 
