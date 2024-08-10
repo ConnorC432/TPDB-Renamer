@@ -101,8 +101,8 @@ def main():
         description='Rename all TPDB image files to match Plex Local Media Asset formats',
         formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument('-t', '--tv', nargs='+', help='TV Directories to rename', required=False)
-    parser.add_argument('-f', '--film', nargs='+', help='Film Directories to rename', required=False)
+    parser.add_argument('-t', '--tv', nargs='+', help='Specify the root TV Directory(s) to rename', required=False)
+    parser.add_argument('-f', '--film', nargs='+', help='Specify the root Film Directory(s) to rename', required=False)
     parser.epilog = 'example usage:\n tpdb-rename.py -t /tv/dir1/ /tv/dir2/ -f /film/dir1/ /film/dir2/'
 
     args = parser.parse_args()
