@@ -1,6 +1,5 @@
 # TPDB-Renamer
 
-
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/license/gpl-3-0/)
 
 ## Authors
@@ -20,15 +19,13 @@ Batch renames all poster image files to match Plex's Local Media Asset formats.\
 #### Options:
 
 #### [-h|--help]
-#### [-t|-tv]	[TV Directory]		[Second TV Directory...]
+
+#### [-t|--tv]    [TV Directory]        [Second TV Directory...]
+
 - Specify the root TV directory(s) to rename
 - Leave empty to rename files in current directory
-#### [-f|-film]	[Film Directory]	[Second Film Directory...]
+
+#### [-f|--film]    [Film Directory]    [Second Film Directory...]
+
 - Specify the root Film directory(s) to rename
 - Leave empty to rename files in current directory
-#### [-d|-default]
-- Rename both TV and Film default directory(s)
-#### [-dt|-defaulttv]
-- Rename TV default directory(s)
-#### [-df|-defaultfilm]
-- Rename Film default directory(s)
