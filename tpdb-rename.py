@@ -31,22 +31,24 @@ class TvDirs:
                     base_name, ext = os.path.splitext(file)
                     ext = ext[1:]
 
+                    #Season image file regex
                     season_pattern = re.compile(r'(.*?) - Season ([0-9]+)\.(png|jpg|jpeg)')
+
+                    #Specials image file regex
                     specials_pattern = re.compile(r'(.*?) - Specials\.(png|jpg|jpeg)')
 
-                    print("test3")
+
                     #Rename Season Images
                     if season_pattern.match(file):
                         match = season_pattern.match(file)
                         new_name = f"Season {match.group(2)}.{match.group(3)}"
-                        print("test1")
 
-                    #Rename Special Images
+                    #Rename Specials Image
                     elif specials_pattern.match(file):
                         match = specials_pattern.match(file)
                         new_name = f"season-specials-poster.{match.group(2)}"
-                        print("test2")
 
+                    #Rename Show Image
                     else:
                         new_name = f"show.{ext}"
 
@@ -54,7 +56,6 @@ class TvDirs:
                         old_file_path = os.path.join(root, file)
                         new_file_path = os.path.join(root, new_name)
 
-                        #Rename File
                         print(f"Renaming {old_file_path} to {new_file_path}...")
                         os.rename(old_file_path, new_file_path)
 
@@ -83,6 +84,7 @@ class FilmDirs:
                     if renamed_image.match(file):
                         continue
 
+                    #Rename Film Image
                     base_name, ext = os.path.splitext(file)
                     ext = ext[1:]
 
@@ -90,13 +92,12 @@ class FilmDirs:
                     old_file_path = os.path.join(root, file)
                     new_file_path = os.path.join(root, new_name)
 
-                    #Rename File
                     print(f"Renaming {old_file_path} to {new_file_path}...")
                     os.rename(old_file_path, new_file_path)
 
 
 def main():
-    #Script Arguments
+    #Script Arguments Parser
     parser = argparse.ArgumentParser(
         description='Rename all TPDB image files to match Plex Local Media Asset formats',
         formatter_class=argparse.RawTextHelpFormatter
@@ -112,10 +113,12 @@ def main():
         parser.print_help()
         return
 
+    #Rename TV Dir Array
     if args.tv:
         tv_dirs = TvDirs(args.tv)
         tv_dirs.rename_dir_array()
 
+    #Rename Film Dir Array
     if args.film:
         film_dirs = FilmDirs(args.film)
         film_dirs.rename_dir_array()
