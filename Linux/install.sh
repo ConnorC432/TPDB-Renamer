@@ -1,11 +1,15 @@
 #!/bin/bash
 # curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/Linux/install.sh | sudo bash
 
+#Clear previously installed files
+curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/Linux/uninstall.sh | sudo bash
+
+
 #Download files
-mkdir /usr/share/tpdb-rename
-curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/tpdb-rename.py -o /usr/share/tpdb-rename/tpdb-rename.py
-curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/Linux/tpdb-rename -o /usr/bin/tpdb-rename
-chmod -R 755 /usr/share/tpdb-rename
+sudo mkdir /usr/share/tpdb-rename
+sudo curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/tpdb-rename.py -o /usr/share/tpdb-rename/tpdb-rename.py
+sudo curl https://raw.githubusercontent.com/ConnorC432/TPDB-Renamer/main/Linux/tpdb-rename -o /usr/bin/tpdb-rename
+sudo chmod -R 755 /usr/share/tpdb-rename
 
 ##Determine whether crontab or systemd is installed
 cron_available=false
@@ -23,8 +27,8 @@ fi
 
 
 ##Determine User/Group
-read -rp "Enter the user to run the script under" script_user
-read -rp "Enter the group to run the script under" script_group
+read -rp "Enter the user to run the script under: " script_user
+read -rp "Enter the group to run the script under: " script_group
 
 #Determine whether crontab or systemd is being used
 cron_using=false
@@ -144,7 +148,7 @@ done
 
 #Add service
 if [[ $cron_using == true ]]; then
-  (crontab -u "$script_user" -l 2>/dev/null; echo "$cron_frequency  /usr/bin/python3 /usr/share/tpdb-rename.py -t $(printf '%s ' "${tv_dirs[@]}") | sed 's/ $//') -f $(printf '%s ' "${film_dirs[@]}")") | crontab -u "$script_user" -
+  (sudo crontab -u "$script_user" -l 2>/dev/null; echo "$cron_frequency  /usr/bin/python3 /usr/share/tpdb-rename/tpdb-rename.py -t $(printf '%s ' "${tv_dirs[@]}") -f $(printf '%s ' "${film_dirs[@]}")") | sudo crontab -u "$script_user" -
 elif [[ $systemd_using == true ]]; then
 
   #systemd service
@@ -155,7 +159,7 @@ Description=tpdb-rename service
 Type=oneshot
 User=$script_user
 Group=$script_group
-ExecStart=/usr/bin/python3 /usr/share/tpdb-rename.py -t $(printf '%s ' "${tv_dirs[@]}") -f $(printf '%s ' "${film_dirs[@]}")" | sudo tee /etc/systemd/system/tpdb-rename.service > /dev/null
+ExecStart=/usr/bin/python3 /usr/share/tpdb-rename/tpdb-rename.py -t $(printf '%s ' "${tv_dirs[@]}") -f $(printf '%s ' "${film_dirs[@]}")" | sudo tee /etc/systemd/system/tpdb-rename.service > /dev/null
 
   #systemd timer
   echo "[Unit]
