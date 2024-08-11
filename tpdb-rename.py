@@ -37,7 +37,6 @@ class TvDirs:
                     #Specials image file regex
                     specials_pattern = re.compile(r'(.*?) - Specials\.(png|jpg|jpeg)')
 
-
                     #Rename Season Images
                     if season_pattern.match(file):
                         match = season_pattern.match(file)
