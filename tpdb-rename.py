@@ -4,7 +4,7 @@ import re
 
 
 #Invalid file extensions
-invalid_file_extensions = {'mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm', 'srt', 'm4v', 'mp3', 'ass'}
+invalid_file_extensions = {'mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm', 'srt', 'm4v', 'mp3', 'ass', 'ts'}
 
 #TV Directory Class
 class TvDirs:
