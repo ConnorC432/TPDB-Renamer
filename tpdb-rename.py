@@ -3,6 +3,9 @@ import os
 import re
 
 
+#Invalid file extensions
+invalid_file_extensions = {'mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm', 'srt'}
+
 #TV Directory Class
 class TvDirs:
     def __init__(self, tv_dirs_array):
@@ -10,7 +13,7 @@ class TvDirs:
 
     def rename_dir_array(self):
         #Previously renamed file regex
-        renamed_image = re.compile(r'(season-specials-poster|show|Season.*|.*S.*E.*)\.(png|jpg|jpeg)')
+        renamed_image = re.compile(r'(season-specials-poster|show|Season.*|.*S.*E.*)\.(png|jpg|jpeg)$')
 
         #Rename all directories in array
         print(f"Renaming {len(self.dir_array)} TV directories...")
@@ -28,8 +31,13 @@ class TvDirs:
                     if renamed_image.match(file):
                         continue
 
+                    #Get File Extension
                     base_name, ext = os.path.splitext(file)
                     ext = ext[1:]
+                    ext = ext.lower()
+
+                    if ext in invalid_file_extensions:
+                        continue
 
                     #Season image file regex
                     season_pattern = re.compile(r'(.*?) - Season ([0-9]+)\.(png|jpg|jpeg)')
@@ -83,10 +91,15 @@ class FilmDirs:
                     if renamed_image.match(file):
                         continue
 
-                    #Rename Film Image
+                    #Get File Extension
                     base_name, ext = os.path.splitext(file)
                     ext = ext[1:]
+                    ext = ext.lower()
 
+                    if ext in invalid_file_extensions:
+                        continue
+
+                    #Rename Film Image
                     new_name = f"poster.{ext}"
                     old_file_path = os.path.join(root, file)
                     new_file_path = os.path.join(root, new_name)
